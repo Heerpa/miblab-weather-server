@@ -1,0 +1,31 @@
+version: "2"
+services:
+  app:
+    container_name: app
+    restart: always
+    build:
+        context: ./..
+        dockerfile: Docker_env/Dockerfile
+    ports:
+      - "3000:3000"
+    # links:
+    depends_on:
+      - mongo
+    expose:
+      - 3000
+    command: >
+      /bin/bash -c "
+        echo sleep 30 s to give mongo a head start;
+        sleep 30;
+        echo starting!;
+        node app;
+      "
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+    expose:
+      - 27017

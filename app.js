@@ -32,6 +32,7 @@ var config = require('./config/main.json')
 
 // Portal Server
 var HOST = '127.0.0.1';
+// var HOST = '0.0.0.0';
 var PORT = config.PORT;
 
 // MongoDB
@@ -40,6 +41,7 @@ var MongoClient = require('mongodb').MongoClient
 
 // Connection URL
 var url = 'mongodb://localhost:27017/miblab-weather-station';
+var url = 'mongodb://mongo:27017/miblab-weather-station'; // for docker
 
 // Use connect method to connect to the server
 MongoClient.connect(url, function(err, db) {
@@ -49,8 +51,13 @@ MongoClient.connect(url, function(err, db) {
 });
 
 // Mongoose
+// var mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost/miblab-weather-station', {
+//   	useMongoClient: true,
+//   /* other options */
+// });
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/miblab-weather-station', {
+mongoose.connect('mongodb://mongo/miblab-weather-station', {
   	useMongoClient: true,
   /* other options */
 });
